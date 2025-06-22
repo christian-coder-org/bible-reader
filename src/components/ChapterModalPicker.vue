@@ -9,6 +9,7 @@
   </ion-header>
 
   <ion-content>
+    <br />
     <ion-list v-if="verses.length > 0">
       <ion-item @click="confirm(n)" v-for="n in props.chaptersCnt" :key="n">
         <ion-icon
