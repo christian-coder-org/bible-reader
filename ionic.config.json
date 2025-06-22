@@ -1,0 +1,7 @@
+{
+  "name": "Bible Reader",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
