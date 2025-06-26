@@ -27,7 +27,7 @@
 
     <!-- CONTENT -->
 
-    <ion-content>
+    <ion-content ref="myContent">
       <br />
       <ion-list lines="inset">
         <ion-item
@@ -63,7 +63,10 @@
         <ion-buttons slot="end">
           <ion-button
             v-show="chapter < chaptersCnt"
-            @click="chapter = chapter + 1"
+            @click="
+              scrollThat();
+              chapter = chapter + 1;
+            "
             >{{ chapter + 1 }}<ion-icon :icon="chevronForwardOutline"></ion-icon
           ></ion-button>
         </ion-buttons>
@@ -108,6 +111,7 @@ const queryParams = route.query;
 // SET REFS
 const identifier = ref(queryParams.identifier);
 const book = ref(queryParams.book);
+
 // @ts-expect-error - Type 'LocationQueryValue[]' cannot be used as an index type.
 const currentBible = BIBLES[identifier.value];
 const testament = ref(queryParams.testament);
@@ -116,10 +120,18 @@ const chapter = ref(0);
 const verses = ref();
 
 const router = useRouter(); // Page back button
+// Used to scroll to top
+const myContent = ref();
+
+// Scrolls the user to the top after a new chapter is selected
+const scrollThat = () => {
+  myContent.value.$el.scrollToPoint(0, 0, 2000);
+};
 
 // FETCH chapter verses when the chapter number changes
 watch(chapter, async () => {
   const path = `/chapters/${identifier.value}/${book.value}/${chapter.value}.json`;
+
   fetch(path)
     .then((response) => response.text())
     .then((jsonString) => {
@@ -150,6 +162,7 @@ const openModal = async () => {
   modal.present();
   const { data, role } = await modal.onWillDismiss();
   if (role === "confirm") {
+    scrollThat();
     if (data) chapter.value = data;
   }
 };
