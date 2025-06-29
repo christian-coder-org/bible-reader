@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: "org.christiancoder.biblereader",
+  appId: "com.wyomingsoftware.biblereader",
   appName: "Bible Reader",
   webDir: "dist",
 };
