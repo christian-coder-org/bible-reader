@@ -9,12 +9,15 @@
           <ion-button @click="openModal"
             ><ion-icon slot="icon-only" :icon="bookOutline" size="large"
           /></ion-button>
+          <ion-button @click="openModal"
+            ><ion-icon slot="icon-only" :icon="bookmarkOutline" size="large"
+          /></ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
     <!-- CONTENT -->
     <ion-content :fullscreen="true" class="ion-padding">
-      <!-- SELECT TESTAMENT-->
+      <!-- SELECT TESTAMENT -->
       <div>
         <ion-segment :value="testament" @ion-change="segmentChanged($event)">
           <ion-segment-button value="old">
@@ -72,7 +75,7 @@ import {
   IonItem,
   modalController,
 } from "@ionic/vue";
-import { bookOutline, chevronForward } from "ionicons/icons";
+import { bookOutline, bookmarkOutline, chevronForward } from "ionicons/icons";
 import BIBLES from "../schema/bibles.json";
 import { BiblesType } from "../interfaces";
 import BibleModalPicker from "@/components/BibleModalPicker.vue";
